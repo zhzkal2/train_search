@@ -49,6 +49,11 @@ class TicketChecker(private val trainConfig: TrainConfig) {
             checkbox.click()
         }
 
+        val inputpeople = driver.findElement(By.id("peop01"))
+        val select_people = Select(inputpeople)
+        select_people.selectByValue("01")
+
+
 
         // 특정 입력 필드를 찾아 "용산" 입력
         val inputField1 = driver.findElement(By.id("start"))
