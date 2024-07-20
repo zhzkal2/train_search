@@ -14,17 +14,17 @@ class TicketController {
 
     @GetMapping("/check-ticket")
     fun checkTicket(
-        @RequestParam url: String,
-        @RequestParam departure: String,
-        @RequestParam arrival: String,
-        @RequestParam people: Int,
-        @RequestParam month: Int,
-        @RequestParam day: Int,
-        @RequestParam hour: Int
+        @RequestParam url: String
+//        @RequestParam departure: String,
+//        @RequestParam arrival: String,
+//        @RequestParam people: Int,
+//        @RequestParam month: Int,
+//        @RequestParam day: Int,
+//        @RequestParam hour: Int
     ): String {
         return try {
-            ticketChecker.checkTicket(url,departure, arrival, people, month, day, hour)
-
+//            ticketChecker.checkTicket(url,departure, arrival, people, month, day, hour)
+                ticketChecker.checkTicket(url)
             //깃 이그노어 테스트를 위해서 주석 추가
 
             "티켓 검사 완료"

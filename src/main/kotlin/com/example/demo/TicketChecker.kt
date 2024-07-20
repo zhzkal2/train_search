@@ -21,7 +21,7 @@ class TicketChecker(private val trainConfig: TrainConfig) {
     @PostConstruct
     fun setup() {
         // WebDriver 초기 설정 (ChromeDriver 경로를 환경 변수로 설정)
-        System.setProperty("webdriver.chrome.driver", "C:\\spring\\tier\\driver\\chromedriver.exe")
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\plo\\Documents\\demo1\\driver\\chromedriver.exe")
         driver = ChromeDriver()
     }
     /*
@@ -34,7 +34,10 @@ class TicketChecker(private val trainConfig: TrainConfig) {
     * day : 요일 = 15
     * hour : 시간 = 7
     */
-    fun checkTicket(url: String ,departure: String, arrival: String, people: Int, month: Int, day: Int, hour: Int) {
+
+
+    //,departure: String, arrival: String, people: Int, month: Int, day: Int, hour: Int 임시
+    fun checkTicket(url: String ) {
         //웹페이지 열기
         driver.get(url)
 
@@ -51,7 +54,7 @@ class TicketChecker(private val trainConfig: TrainConfig) {
 
         val inputpeople = driver.findElement(By.id("peop01"))
         val select_people = Select(inputpeople)
-        select_people.selectByValue("01")
+        select_people.selectByValue("2")
 
 
 
@@ -73,7 +76,7 @@ class TicketChecker(private val trainConfig: TrainConfig) {
         // select 요소를 찾고 값을 "22"로 설정
         val selectElement_day = driver.findElement(By.id("s_day"))
         val select_day = Select(selectElement_day)
-        select_day.selectByValue("22") // 값을 변경하려는 옵션의 value 속성을 입력합니다.
+        select_day.selectByValue("21") // 값을 변경하려는 옵션의 value 속성을 입력합니다.
 
 
         // select 요소를 찾고 값을 "22"로 설정
@@ -96,11 +99,16 @@ class TicketChecker(private val trainConfig: TrainConfig) {
 
         val availableTrains = mutableListOf<TrainInfo>()
 
-        // 예매 가능 열을 찾아 availableTrains에 add
+
         for (row in rows) {
             try {
-                val reservationButton = row.findElements(By.cssSelector("img[alt='예약하기']"))
-                if (reservationButton != null) {
+
+                val sixthTdElement = row.findElement(By.cssSelector("td:nth-child(6)"))
+                val reservationButton = sixthTdElement.findElements(By.cssSelector("img[alt='예약하기']"))
+
+                println("Reservation Buttons: $reservationButton")
+
+                if (reservationButton.isNotEmpty()) {
                     val trainNumber = row.findElement(By.cssSelector("td:nth-child(2) span")).text.trim()
                     val departureStation = row.findElement(By.cssSelector("td:nth-child(3)")).text.split("\n")[0].trim()
                     val departureTime = row.findElement(By.cssSelector("td:nth-child(3)")).text.split("\n")[1].trim()
