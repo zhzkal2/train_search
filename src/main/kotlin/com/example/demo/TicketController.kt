@@ -25,6 +25,8 @@ class TicketController {
         return try {
             ticketChecker.checkTicket(url,departure, arrival, people, month, day, hour)
 
+            //깃 이그노어 테스트를 위해서 주석 추가
+
             "티켓 검사 완료"
 
         } catch (e: Exception) {
