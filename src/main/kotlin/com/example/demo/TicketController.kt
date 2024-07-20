@@ -13,12 +13,25 @@ class TicketController {
 
 
     @GetMapping("/check-ticket")
-    fun checkTicket(@RequestParam url: String): String {
+    fun checkTicket(
+        @RequestParam url: String,
+        @RequestParam departure: String,
+        @RequestParam arrival: String,
+        @RequestParam people: Int,
+        @RequestParam month: Int,
+        @RequestParam day: Int,
+        @RequestParam hour: Int
+    ): String {
         return try {
-            ticketChecker.checkTicket(url)
+            ticketChecker.checkTicket(url,departure, arrival, people, month, day, hour)
+
             "티켓 검사 완료"
+
         } catch (e: Exception) {
             "티켓 검사 중 오류 발생: ${e.message}"
         }
     }
+
+
+
 }

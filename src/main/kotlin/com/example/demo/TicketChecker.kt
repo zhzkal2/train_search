@@ -24,8 +24,17 @@ class TicketChecker(private val trainConfig: TrainConfig) {
         System.setProperty("webdriver.chrome.driver", "C:\\spring\\tier\\driver\\chromedriver.exe")
         driver = ChromeDriver()
     }
-
-    fun checkTicket(url: String) {
+    /*
+    * update 2024.07.21
+    * url ktx주소 추후에 srt로 구현이 가능할 수 있도록 url은 string으로 받음
+    * departure : 출발지 = 용산
+    * arrival : 도착지  = 천안아산
+    * people :  인원수 = 2
+    * month :  개월 = 7
+    * day : 요일 = 15
+    * hour : 시간 = 7
+    */
+    fun checkTicket(url: String ,departure: String, arrival: String, people: Int, month: Int, day: Int, hour: Int) {
         //웹페이지 열기
         driver.get(url)
 
